@@ -1,0 +1,32 @@
+{
+    "name": "path-finding-2d",
+    "version": "0.1.0",
+    "description": "Fast 2D pathfinding library using triangulated navmesh",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "example": "node example.js",
+        "visual": "node example-visual.js",
+        "demo": "node comparison-test.js"
+    },
+    "keywords": [
+        "pathfinding",
+        "navmesh",
+        "2d",
+        "triangulation",
+        "astar",
+        "navigation"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "poly-math-2d": "^0.2.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.0.0",
+        "@types/node": "^20.0.0",
+        "svg-builder": "^1.0.1"
+    }
+}

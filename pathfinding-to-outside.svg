@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .polygon { fill: #e8f4fd; stroke: #2196f3; stroke-width: 2; }
+      .hole { fill: white; stroke: #f44336; stroke-width: 2; stroke-dasharray: 5,5; }
+      .triangle { fill: none; stroke: #ddd; stroke-width: 0.5; opacity: 0.5; }
+      .point-start { fill: #4caf50; stroke: #2e7d32; stroke-width: 2; }
+      .point-end { fill: #ff9800; stroke: #f57c00; stroke-width: 2; }
+      .point-outside { fill: #f44336; stroke: #c62828; stroke-width: 2; }
+      .point-hole { fill: #9c27b0; stroke: #6a1b9a; stroke-width: 2; }
+      .path { fill: none; stroke: #4caf50; stroke-width: 3; stroke-linecap: round; }
+      .path-arrow { fill: #4caf50; }
+      .label { font-family: Arial, sans-serif; font-size: 12px; fill: #333; }
+      .title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #333; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#fafafa"/>
+  <text x="400" y="30" class="title" text-anchor="middle" style="font-size: 20px;">Test: Paths to points outside navmesh</text>
+  <path d="M 50 50 L 300 50 L 300 300 L 50 300 Z" class="polygon" style="fill: #e3f2fd"/>
+  <path d="M 150 150 L 200 150 L 200 200 L 150 200 Z" class="hole"/>
+  <text x="175" y="175" class="title" text-anchor="middle">Polygon 1</text>
+  <path d="M 350 50 L 550 50 L 550 200 L 450 200 L 450 300 L 350 300 Z" class="polygon" style="fill: #f3e5f5"/>
+  <path d="M 475 100 L 525 100 L 525 150 L 475 150 Z" class="hole"/>
+  <text x="450" y="183.33333333333334" class="title" text-anchor="middle">Polygon 2</text>
+  <path d="M 150 350 L 350 350 L 250 550 Z" class="polygon" style="fill: #e8f5e8"/>
+  <path d="M 225 400 L 275 400 L 250 450 Z" class="hole"/>
+  <text x="250" y="416.66666666666663" class="title" text-anchor="middle">Polygon 3</text>
+  <path d="M 50 50 L 150 150 L 150 200 Z" class="triangle"/>
+  <path d="M 200 150 L 150 150 L 50 50 Z" class="triangle"/>
+  <path d="M 50 300 L 50 50 L 150 200 Z" class="triangle"/>
+  <path d="M 200 150 L 50 50 L 300 50 Z" class="triangle"/>
+  <path d="M 300 300 L 50 300 L 150 200 Z" class="triangle"/>
+  <path d="M 200 200 L 200 150 L 300 50 Z" class="triangle"/>
+  <path d="M 300 300 L 150 200 L 200 200 Z" class="triangle"/>
+  <path d="M 200 200 L 300 50 L 300 300 Z" class="triangle"/>
+  <path d="M 350 50 L 475 100 L 475 150 Z" class="triangle"/>
+  <path d="M 525 100 L 475 100 L 350 50 Z" class="triangle"/>
+  <path d="M 450 200 L 450 300 L 350 300 Z" class="triangle"/>
+  <path d="M 350 300 L 350 50 L 475 150 Z" class="triangle"/>
+  <path d="M 525 100 L 350 50 L 550 50 Z" class="triangle"/>
+  <path d="M 450 200 L 350 300 L 475 150 Z" class="triangle"/>
+  <path d="M 525 150 L 525 100 L 550 50 Z" class="triangle"/>
+  <path d="M 550 200 L 450 200 L 475 150 Z" class="triangle"/>
+  <path d="M 525 150 L 550 50 L 550 200 Z" class="triangle"/>
+  <path d="M 550 200 L 475 150 L 525 150 Z" class="triangle"/>
+  <path d="M 150 350 L 225 400 L 250 450 Z" class="triangle"/>
+  <path d="M 275 400 L 225 400 L 150 350 Z" class="triangle"/>
+  <path d="M 250 550 L 150 350 L 250 450 Z" class="triangle"/>
+  <path d="M 275 400 L 150 350 L 350 350 Z" class="triangle"/>
+  <path d="M 350 350 L 250 550 L 250 450 Z" class="triangle"/>
+  <path d="M 250 450 L 275 400 L 350 350 Z" class="triangle"/>
+  <circle cx="125" cy="125" r="4" class="point-start"/>
+  <text x="133" y="117" class="label">C1</text>
+  <circle cx="650" cy="650" r="4" class="point-outside"/>
+  <text x="658" y="642" class="label">D1 (outside)</text>
+  <path d="M 125 125 L 150 200 L 150 200 L 216.66666666666669 233.33333333333331" class="path"/>
+  <polygon points="138.44868329805053,165.34604989415155 136.07697505292424,162.97434164902526 138.92302494707576,162.02565835097474" class="path-arrow"/>
+  <polygon points="NaN,NaN NaN,NaN NaN,NaN" class="path-arrow"/>
+  <polygon points="186.0166149063331,218.0083074531665 182.66251294008342,218.0083074531665 184.00415372658327,215.32502588016675" class="path-arrow"/>
+  <text x="150" y="185" class="label" text-anchor="middle" style="background: white;">C1 → D1 (outside)</text>
+  <circle cx="400" cy="125" r="4" class="point-start"/>
+  <text x="408" y="117" class="label">C2</text>
+  <circle cx="600" cy="600" r="4" class="point-outside"/>
+  <text x="608" y="592" class="label">D2 (outside)</text>
+  <path d="M 400 125 L 416.66666666666663 266.6666666666667" class="path"/>
+  <polygon points="408.68385707603545,198.81278514630196 406.84360742684896,196.00859520468444 409.82305923981755,195.65807146198225" class="path-arrow"/>
+  <text x="416.66666666666663" y="251.66666666666669" class="label" text-anchor="middle" style="background: white;">C2 → D2 (outside)</text>
+  <circle cx="225" cy="450" r="4" class="point-start"/>
+  <text x="233" y="442" class="label">C3</text>
+  <circle cx="50" cy="650" r="4" class="point-outside"/>
+  <text x="58" y="642" class="label">D3 (outside)</text>
+  <path d="M 225 450 L 216.66666666666669 450" class="path"/>
+  <polygon points="217.83333333333337,450 220.83333333333337,448.5 220.83333333333337,451.5" class="path-arrow"/>
+  <text x="216.66666666666669" y="435" class="label" text-anchor="middle" style="background: white;">C3 → D3 (outside)</text>
+  <rect x="610" y="50" width="170" height="180" fill="white" stroke="#ddd" stroke-width="1"/>
+  <text x="620" y="60" class="title">Legend:</text>
+  <rect x="620" y="77" width="12" height="12" fill="#e8f4fd" stroke="#2196f3" stroke-width="1" />
+  <text x="640" y="87" class="label">Polygon</text>
+  <rect x="620" y="97" width="12" height="12" fill="white" stroke="#f44336" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="640" y="107" class="label">Hole</text>
+  <circle cx="626" cy="123" r="4" fill="#4caf50" stroke="#333" stroke-width="1"/>
+  <text x="640" y="127" class="label">Start point</text>
+  <circle cx="626" cy="143" r="4" fill="#ff9800" stroke="#333" stroke-width="1"/>
+  <text x="640" y="147" class="label">End point</text>
+  <circle cx="626" cy="163" r="4" fill="#f44336" stroke="#333" stroke-width="1"/>
+  <text x="640" y="167" class="label">Point outside navmesh</text>
+  <circle cx="626" cy="183" r="4" fill="#9c27b0" stroke="#333" stroke-width="1"/>
+  <text x="640" y="187" class="label">Point in hole</text>
+  <line x1="620" y1="203" x2="632" y2="203" stroke="#4caf50" stroke-width="2"/>
+  <text x="640" y="207" class="label">Found path</text>
+</svg>
