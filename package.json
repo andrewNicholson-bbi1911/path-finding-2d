@@ -1,6 +1,6 @@
 {
     "name": "path-finding-2d",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "Fast 2D pathfinding library using triangulated navmesh",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",

@@ -18,7 +18,7 @@ npm install path-finding-2d
 ```
 
 ## Demonstration
-Скрипт для визуализации можно посмотреть в репозитории проекта: [https://github.com/andrewNicholson-bbi1911/path-finding-2d](https://github.com/andrewNicholson-bbi1911/path-finding-2d)
+You can find the visualization script in the project repository: [https://github.com/andrewNicholson-bbi1911/path-finding-2d](https://github.com/andrewNicholson-bbi1911/path-finding-2d)
 
 ### Successful Paths Inside Polygons
 ![Successful Paths](pathfinding-successful.svg)
@@ -35,7 +35,7 @@ npm install path-finding-2d
 import { Point, Polygon, PolygonMap } from 'poly-math-2d';
 import { NavMesh2d } from 'path-finding-2d';
 
-// Create a polygon with a hole (as in visualization example)
+// Create points for polygon with a hole (as in visualization example)
 const outerPoints = [
     new Point(50, 50),
     new Point(300, 50),
@@ -112,7 +112,7 @@ The library uses the following approach for pathfinding:
 
 1. **Triangulation:** Polygons are automatically triangulated by poly-math-2d library
 2. **Neighborhood Graph:** Triangles are connected through shared edges (connections in TPolygon)
-3. **A* Search:** Uses A* algorithm to find optimal path through triangles
+3. **A-star Search:** Uses A* algorithm to find optimal path through triangles
 4. **String Pulling Optimization:** Applies advanced string-pulling algorithm to find shortest path through portal edges between triangles
 5. **Portal System:** Uses shared triangle edges as "portals" for optimal traversal
 6. **Intelligent Optimization:** Automatically cuts corners and finds the most efficient route within the navmesh
