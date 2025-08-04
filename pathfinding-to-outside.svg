@@ -20,61 +20,85 @@
   <rect width="800" height="600" fill="#fafafa"/>
   <text x="400" y="30" class="title" text-anchor="middle" style="font-size: 20px;">Test: Paths to points outside navmesh</text>
   <path d="M 50 50 L 300 50 L 300 300 L 50 300 Z" class="polygon" style="fill: #e3f2fd"/>
-  <path d="M 150 150 L 200 150 L 200 200 L 150 200 Z" class="hole"/>
+  <path d="M 125 125 L 225 125 L 225 225 L 125 225 Z" class="hole"/>
   <text x="175" y="175" class="title" text-anchor="middle">Polygon 1</text>
   <path d="M 350 50 L 550 50 L 550 200 L 450 200 L 450 300 L 350 300 Z" class="polygon" style="fill: #f3e5f5"/>
-  <path d="M 475 100 L 525 100 L 525 150 L 475 150 Z" class="hole"/>
+  <path d="M 375 100 L 525 100 L 525 150 L 425 150 L 425 250 L 375 250 Z" class="hole"/>
   <text x="450" y="183.33333333333334" class="title" text-anchor="middle">Polygon 2</text>
-  <path d="M 150 350 L 350 350 L 250 550 Z" class="polygon" style="fill: #e8f5e8"/>
-  <path d="M 225 400 L 275 400 L 250 450 Z" class="hole"/>
-  <text x="250" y="416.66666666666663" class="title" text-anchor="middle">Polygon 3</text>
-  <path d="M 50 50 L 150 150 L 150 200 Z" class="triangle"/>
-  <path d="M 200 150 L 150 150 L 50 50 Z" class="triangle"/>
-  <path d="M 50 300 L 50 50 L 150 200 Z" class="triangle"/>
-  <path d="M 200 150 L 50 50 L 300 50 Z" class="triangle"/>
-  <path d="M 300 300 L 50 300 L 150 200 Z" class="triangle"/>
-  <path d="M 200 200 L 200 150 L 300 50 Z" class="triangle"/>
-  <path d="M 300 300 L 150 200 L 200 200 Z" class="triangle"/>
-  <path d="M 200 200 L 300 50 L 300 300 Z" class="triangle"/>
-  <path d="M 350 50 L 475 100 L 475 150 Z" class="triangle"/>
-  <path d="M 525 100 L 475 100 L 350 50 Z" class="triangle"/>
-  <path d="M 450 200 L 450 300 L 350 300 Z" class="triangle"/>
-  <path d="M 350 300 L 350 50 L 475 150 Z" class="triangle"/>
+  <path d="M 150 325 L 200 400 L 300 350 L 300 400 L 350 325 L 500 325 L 550 350 L 550 425 L 450 475 L 400 425 L 300 525 L 350 550 L 150 550 L 150 450 L 100 400 Z" class="polygon" style="fill: #e8f5e8"/>
+  <path d="M 450 375 L 450 350 L 500 400 L 350 400 Z" class="hole"/>
+  <path d="M 300 450 L 200 525 L 200 425 Z" class="hole"/>
+  <text x="320" y="418.33333333333337" class="title" text-anchor="middle">Polygon 3</text>
+  <path d="M 50 50 L 125 125 L 125 225 Z" class="triangle"/>
+  <path d="M 225 125 L 125 125 L 50 50 Z" class="triangle"/>
+  <path d="M 50 300 L 50 50 L 125 225 Z" class="triangle"/>
+  <path d="M 225 125 L 50 50 L 300 50 Z" class="triangle"/>
+  <path d="M 300 300 L 50 300 L 125 225 Z" class="triangle"/>
+  <path d="M 225 225 L 225 125 L 300 50 Z" class="triangle"/>
+  <path d="M 300 300 L 125 225 L 225 225 Z" class="triangle"/>
+  <path d="M 225 225 L 300 50 L 300 300 Z" class="triangle"/>
+  <path d="M 350 50 L 375 100 L 375 250 Z" class="triangle"/>
+  <path d="M 525 100 L 375 100 L 350 50 Z" class="triangle"/>
+  <path d="M 350 300 L 350 50 L 375 250 Z" class="triangle"/>
   <path d="M 525 100 L 350 50 L 550 50 Z" class="triangle"/>
-  <path d="M 450 200 L 350 300 L 475 150 Z" class="triangle"/>
+  <path d="M 450 300 L 350 300 L 375 250 Z" class="triangle"/>
   <path d="M 525 150 L 525 100 L 550 50 Z" class="triangle"/>
-  <path d="M 550 200 L 450 200 L 475 150 Z" class="triangle"/>
+  <path d="M 450 300 L 375 250 L 425 250 Z" class="triangle"/>
   <path d="M 525 150 L 550 50 L 550 200 Z" class="triangle"/>
-  <path d="M 550 200 L 475 150 L 525 150 Z" class="triangle"/>
-  <path d="M 150 350 L 225 400 L 250 450 Z" class="triangle"/>
-  <path d="M 275 400 L 225 400 L 150 350 Z" class="triangle"/>
-  <path d="M 250 550 L 150 350 L 250 450 Z" class="triangle"/>
-  <path d="M 275 400 L 150 350 L 350 350 Z" class="triangle"/>
-  <path d="M 350 350 L 250 550 L 250 450 Z" class="triangle"/>
-  <path d="M 250 450 L 275 400 L 350 350 Z" class="triangle"/>
-  <circle cx="125" cy="125" r="4" class="point-start"/>
-  <text x="133" y="117" class="label">C1</text>
-  <circle cx="650" cy="650" r="4" class="point-outside"/>
-  <text x="658" y="642" class="label">D1 (outside)</text>
-  <path d="M 125 125 L 150 200 L 150 200 L 216.66666666666669 233.33333333333331" class="path"/>
-  <polygon points="138.44868329805053,165.34604989415155 136.07697505292424,162.97434164902526 138.92302494707576,162.02565835097474" class="path-arrow"/>
-  <polygon points="NaN,NaN NaN,NaN NaN,NaN" class="path-arrow"/>
-  <polygon points="186.0166149063331,218.0083074531665 182.66251294008342,218.0083074531665 184.00415372658327,215.32502588016675" class="path-arrow"/>
-  <text x="150" y="185" class="label" text-anchor="middle" style="background: white;">C1 → D1 (outside)</text>
-  <circle cx="400" cy="125" r="4" class="point-start"/>
-  <text x="408" y="117" class="label">C2</text>
-  <circle cx="600" cy="600" r="4" class="point-outside"/>
-  <text x="608" y="592" class="label">D2 (outside)</text>
-  <path d="M 400 125 L 416.66666666666663 266.6666666666667" class="path"/>
-  <polygon points="408.68385707603545,198.81278514630196 406.84360742684896,196.00859520468444 409.82305923981755,195.65807146198225" class="path-arrow"/>
-  <text x="416.66666666666663" y="251.66666666666669" class="label" text-anchor="middle" style="background: white;">C2 → D2 (outside)</text>
-  <circle cx="225" cy="450" r="4" class="point-start"/>
-  <text x="233" y="442" class="label">C3</text>
-  <circle cx="50" cy="650" r="4" class="point-outside"/>
-  <text x="58" y="642" class="label">D3 (outside)</text>
-  <path d="M 225 450 L 216.66666666666669 450" class="path"/>
-  <polygon points="217.83333333333337,450 220.83333333333337,448.5 220.83333333333337,451.5" class="path-arrow"/>
-  <text x="216.66666666666669" y="435" class="label" text-anchor="middle" style="background: white;">C3 → D3 (outside)</text>
+  <path d="M 450 200 L 450 300 L 425 250 Z" class="triangle"/>
+  <path d="M 425 150 L 525 150 L 550 200 Z" class="triangle"/>
+  <path d="M 450 200 L 425 250 L 425 150 Z" class="triangle"/>
+  <path d="M 425 150 L 550 200 L 450 200 Z" class="triangle"/>
+  <path d="M 350 325 L 500 325 L 550 350 Z" class="triangle"/>
+  <path d="M 550 350 L 550 425 L 450 475 Z" class="triangle"/>
+  <path d="M 300 525 L 350 550 L 150 550 Z" class="triangle"/>
+  <path d="M 150 450 L 100 400 L 200 425 Z" class="triangle"/>
+  <path d="M 100 400 L 150 325 L 200 400 Z" class="triangle"/>
+  <path d="M 200 400 L 300 350 L 300 400 Z" class="triangle"/>
+  <path d="M 150 550 L 150 450 L 200 425 Z" class="triangle"/>
+  <path d="M 300 450 L 100 400 L 200 400 Z" class="triangle"/>
+  <path d="M 150 550 L 200 425 L 200 525 Z" class="triangle"/>
+  <path d="M 300 450 L 200 400 L 300 400 Z" class="triangle"/>
+  <path d="M 300 525 L 150 550 L 200 525 Z" class="triangle"/>
+  <path d="M 300 450 L 300 400 L 350 400 Z" class="triangle"/>
+  <path d="M 450 350 L 450 375 L 350 400 Z" class="triangle"/>
+  <path d="M 350 400 L 300 400 L 350 325 Z" class="triangle"/>
+  <path d="M 400 425 L 300 525 L 200 525 Z" class="triangle"/>
+  <path d="M 450 350 L 350 400 L 350 325 Z" class="triangle"/>
+  <path d="M 400 425 L 200 525 L 300 450 Z" class="triangle"/>
+  <path d="M 450 350 L 350 325 L 550 350 Z" class="triangle"/>
+  <path d="M 400 425 L 300 450 L 350 400 Z" class="triangle"/>
+  <path d="M 500 400 L 450 350 L 550 350 Z" class="triangle"/>
+  <path d="M 400 425 L 350 400 L 500 400 Z" class="triangle"/>
+  <path d="M 500 400 L 550 350 L 450 475 Z" class="triangle"/>
+  <path d="M 450 475 L 400 425 L 500 400 Z" class="triangle"/>
+  <circle cx="100" cy="100" r="4" class="point-start"/>
+  <text x="108" y="92" class="label">C1</text>
+  <circle cx="315" cy="225" r="4" class="point-outside"/>
+  <text x="323" y="217" class="label">D1 (outside)</text>
+  <path d="M 100 100 L 125 125 L 225 125 L 300 225" class="path"/>
+  <polygon points="114.62132034355965,114.62132034355965 111.43933982822018,113.56066017177982 113.56066017177982,111.43933982822018" class="path-arrow"/>
+  <polygon points="178,125 175,126.5 175,123.5" class="path-arrow"/>
+  <polygon points="264.3,177.4 261.3,175.9 263.7,174.1" class="path-arrow"/>
+  <text x="225" y="110" class="label" text-anchor="middle" style="background: white;">C1 → D1 (outside)</text>
+  <circle cx="400" cy="75" r="4" class="point-start"/>
+  <text x="408" y="67" class="label">C2</text>
+  <circle cx="500" cy="210" r="4" class="point-outside"/>
+  <text x="508" y="202" class="label">D2 (outside)</text>
+  <path d="M 400 75 L 525 100 L 525 150 L 500 200" class="path"/>
+  <polygon points="465.44174202707273,88.08834840541455 462.20582579729273,88.97087101353638 462.79417420270727,86.02912898646362" class="path-arrow"/>
+  <polygon points="525,128 523.5,125 526.5,125" class="path-arrow"/>
+  <polygon points="511.15835921350015,177.68328157299976 511.15835921350015,174.32917960675007 513.8416407864999,175.67082039324993" class="path-arrow"/>
+  <text x="525" y="135" class="label" text-anchor="middle" style="background: white;">C2 → D2 (outside)</text>
+  <circle cx="150" cy="350" r="4" class="point-start"/>
+  <text x="158" y="342" class="label">C3</text>
+  <circle cx="425" cy="475" r="4" class="point-outside"/>
+  <text x="433" y="467" class="label">D3 (outside)</text>
+  <path d="M 150 350 L 200 400 L 400 425 L 437.5 462.5" class="path"/>
+  <polygon points="177.12132034355963,377.12132034355966 173.93933982822017,376.06066017177983 176.06066017177983,373.93933982822017" class="path-arrow"/>
+  <polygon points="302.976833630141,412.8721042037676 299.81394789811617,413.9884168150705 300.18605210188383,411.0115831849295" class="path-arrow"/>
+  <polygon points="420.87132034355966,445.87132034355966 417.68933982822017,444.81066017177983 419.81066017177983,442.68933982822017" class="path-arrow"/>
+  <text x="400" y="410" class="label" text-anchor="middle" style="background: white;">C3 → D3 (outside)</text>
   <rect x="610" y="50" width="170" height="180" fill="white" stroke="#ddd" stroke-width="1"/>
   <text x="620" y="60" class="title">Legend:</text>
   <rect x="620" y="77" width="12" height="12" fill="#e8f4fd" stroke="#2196f3" stroke-width="1" />

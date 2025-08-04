@@ -1,4 +1,5 @@
 import { Point, PolygonMap, TPolygon, Polygon } from 'poly-math-2d';
+import { pointInTriangle } from 'poly-math-2d/dist/poly2d.js';
 
 /**
  * Priority queue node for A* pathfinding
@@ -44,16 +45,15 @@ export class NavMesh2d {
      * Check if point is inside any triangle using barycentric coordinates (fastest method)
      */
     private isPointInTriangle(point: Point, triangle: TPolygon): boolean {
-        const [p0, p1, p2] = triangle.mainTriangle;
+        // Standard check
+        const isInside = pointInTriangle(point, triangle.mainTriangle);
+        if (isInside) return true;
 
-        const denom = (p1.y - p2.y) * (p0.x - p2.x) + (p2.x - p1.x) * (p0.y - p2.y);
-        if (Math.abs(denom) < 1e-10) return false; // Degenerate triangle
-
-        const a = ((p1.y - p2.y) * (point.x - p2.x) + (p2.x - p1.x) * (point.y - p2.y)) / denom;
-        const b = ((p2.y - p0.y) * (point.x - p2.x) + (p0.x - p2.x) * (point.y - p2.y)) / denom;
-        const c = 1 - a - b;
-
-        return a >= 0 && b >= 0 && c >= 0;
+        // Edge check
+        const [p1, p2, p3] = triangle.mainTriangle;
+        return NavMesh2d.isPointOnSegment(point, p1, p2) ||
+            NavMesh2d.isPointOnSegment(point, p2, p3) ||
+            NavMesh2d.isPointOnSegment(point, p3, p1);
     }
 
     /**
@@ -76,9 +76,9 @@ export class NavMesh2d {
     }
 
     /**
- * Find path from point A to point B using A* algorithm on triangle centers
- */
-    public findPath(a: Point, b: Point): Point[] {
+     * Find path from point A to point B using A* algorithm on triangle centers
+     */
+    public findPath(a: Point, b: Point, closestToStart: boolean = false): Point[] {
         const startTriangle = this.findTriangleContainingPoint(a);
         if (!startTriangle) {
             return []; // Point A is not in navmesh
@@ -95,8 +95,18 @@ export class NavMesh2d {
             const startPolygon = this.polygonMap.polygons.find((p: Polygon) => p.tpolygons.includes(startTriangle));
             if (!startPolygon) return [];
 
-            // Find closest point to B within start polygon
-            targetPoint = this.findClosestPointInPolygon(b, startPolygon);
+            if (closestToStart) {
+                const intersectionPoint = this.findIntersectionWithPolygon(a, b, startPolygon);
+                if (intersectionPoint) {
+                    targetPoint = intersectionPoint;
+                } else {
+                    // Fallback to default behavior if no intersection found
+                    targetPoint = this.findClosestPointInPolygon(b, startPolygon);
+                }
+            } else {
+                targetPoint = this.findClosestPointInPolygon(b, startPolygon);
+            }
+
             targetTriangle = this.findTriangleContainingPoint(targetPoint);
 
             if (!targetTriangle) return [];
@@ -121,7 +131,93 @@ export class NavMesh2d {
         const fullTrianglePath = [startTriangle, ...trianglePath];
 
         // Apply Funnel Algorithm for optimal path
-        return this.funnel(a, targetPoint, fullTrianglePath);
+        const path = this.funnel(a, targetPoint, fullTrianglePath);
+
+        if (path.length > 0 && !this.pointsEqual(path[path.length - 1], targetPoint)) {
+            path.push(targetPoint);
+        }
+
+        return path;
+    }
+
+    private findIntersectionWithPolygon(p1: Point, q1: Point, polygon: Polygon): Point | null {
+        let closestIntersection: Point | null = null;
+        let minDistanceSq = Infinity;
+
+        const findOnEdges = (edges: Point[]) => {
+            for (let i = 0; i < edges.length; i++) {
+                const p2 = edges[i];
+                const q2 = edges[(i + 1) % edges.length];
+                const intersection = this.getSegmentIntersectionPoint(p1, q1, p2, q2);
+                if (intersection) {
+                    const distSq = Point.getDistanceSquared(p1, intersection);
+                    if (distSq < minDistanceSq) {
+                        minDistanceSq = distSq;
+                        closestIntersection = intersection;
+                    }
+                }
+            }
+        };
+
+        findOnEdges(polygon.points);
+        for (const hole of polygon.holes) {
+            findOnEdges(hole.points);
+        }
+
+        return closestIntersection;
+    }
+
+    private getSegmentIntersectionPoint(p1: Point, q1: Point, p2: Point, q2: Point): Point | null {
+        const r = new Point(q1.x - p1.x, q1.y - p1.y);
+        const s = new Point(q2.x - p2.x, q2.y - p2.y);
+
+        const rxs = r.x * s.y - r.y * s.x;
+        if (Math.abs(rxs) < 1e-8) { // Check for parallel or collinear lines with a small epsilon
+            return null;
+        }
+
+        const qp = new Point(p2.x - p1.x, p2.y - p1.y);
+        const t = (qp.x * s.y - qp.y * s.x) / rxs;
+        const u = (qp.x * r.y - qp.y * r.x) / rxs;
+
+        if (t >= 0 && t <= 1 && u >= 0 && u <= 1) {
+            return new Point(p1.x + t * r.x, p1.y + t * r.y);
+        }
+
+        return null; // No intersection within segments
+    }
+
+    /**
+     * Find closest point on a line segment
+     */
+    private static closestPointOnSegment(p: Point, a: Point, b: Point): Point {
+        const a_to_p = new Point(p.x - a.x, p.y - a.y);
+        const a_to_b = new Point(b.x - a.x, b.y - a.y);
+
+        const atb2 = a_to_b.x * a_to_b.x + a_to_b.y * a_to_b.y;
+        if (atb2 == 0) return a;
+
+        const dot = a_to_p.x * a_to_b.x + a_to_p.y * a_to_b.y;
+        const t = Math.max(0, Math.min(1, dot / atb2));
+
+        return new Point(a.x + a_to_b.x * t, a.y + a_to_b.y * t);
+    }
+
+    private static isPointOnSegment(p: Point, a: Point, b: Point): boolean {
+        const ab = new Point(b.x - a.x, b.y - a.y);
+        const ap = new Point(p.x - a.x, p.y - a.y);
+
+        const cross = ab.x * ap.y - ab.y * ap.x;
+        if (Math.abs(cross) > 1e-9) {
+            return false; // Not collinear
+        }
+
+        const dot = ap.x * ab.x + ap.y * ab.y;
+        if (dot < 0 || dot > (ab.x * ab.x + ab.y * ab.y)) {
+            return false; // Outside segment
+        }
+
+        return true;
     }
 
     /**
@@ -129,15 +225,36 @@ export class NavMesh2d {
      */
     private findClosestPointInPolygon(target: Point, polygon: Polygon): Point {
         let closestPoint = target;
-        let minDistance = Infinity;
+        let minDistanceSq = Infinity;
 
-        // Check all triangle centers in the polygon
-        for (const triangle of polygon.tpolygons) {
-            const center = this.getTriangleCenter(triangle);
-            const distance = Point.getDistanceSquared(target, center);
-            if (distance < minDistance) {
-                minDistance = distance;
-                closestPoint = center;
+        const checkPoint = (p: Point) => {
+            const d = Point.getDistanceSquared(target, p);
+            if (d < minDistanceSq) {
+                minDistanceSq = d;
+                closestPoint = p;
+            }
+        };
+
+        // Check all vertices
+        for (const p of polygon.points) {
+            checkPoint(p);
+        }
+
+        // Check edges
+        for (let i = 0; i < polygon.points.length; i++) {
+            const p1 = polygon.points[i];
+            const p2 = polygon.points[(i + 1) % polygon.points.length];
+            const closest = NavMesh2d.closestPointOnSegment(target, p1, p2);
+            checkPoint(closest);
+        }
+
+        // Also check hole edges
+        for (const holePolygon of polygon.holes) {
+            for (let i = 0; i < holePolygon.points.length; i++) {
+                const p1 = holePolygon.points[i];
+                const p2 = holePolygon.points[(i + 1) % holePolygon.points.length];
+                const closest = NavMesh2d.closestPointOnSegment(target, p1, p2);
+                checkPoint(closest);
             }
         }
 
@@ -371,14 +488,11 @@ export class NavMesh2d {
      * Calculate twice the signed area of triangle formed by three points
      */
     private triArea2(a: Point, b: Point, c: Point): number {
-        return (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
+        return (c.x - a.x) * (b.y - a.y) - (b.x - a.x) * (c.y - a.y);
     }
 
-    /**
-     * Check if two points are equal (with small epsilon for floating point comparison)
-     */
     private pointsEqual(p1: Point, p2: Point): boolean {
-        const epsilon = 1e-10;
+        const epsilon = 1e-9;
         return Math.abs(p1.x - p2.x) < epsilon && Math.abs(p1.y - p2.y) < epsilon;
     }
 } 

@@ -13,11 +13,19 @@
     },
     "keywords": [
         "pathfinding",
+        "path-finding",
         "navmesh",
+        "navigation mesh",
+        "navigation",
         "2d",
         "triangulation",
         "astar",
-        "navigation"
+        "navigation",
+        "string-pulling",
+        "string pulling",
+        "polygons",
+        "2d math",
+        "typescript"
     ],
     "author": "",
     "license": "MIT",

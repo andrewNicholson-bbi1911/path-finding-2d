@@ -14,10 +14,10 @@ const polygon1Outer = [
     new Point(0, 50)
 ];
 const polygon1Hole = new Polygon([
-    new Point(20, 20),
-    new Point(30, 20),
-    new Point(30, 30),
-    new Point(20, 30)
+    new Point(15, 15),
+    new Point(35, 15),
+    new Point(35, 35),
+    new Point(15, 35)
 ]);
 const polygon1 = new Polygon(polygon1Outer, [polygon1Hole]);
 
@@ -31,25 +31,49 @@ const polygon2Outer = [
     new Point(60, 50)
 ];
 const polygon2Hole = new Polygon([
-    new Point(85, 10),
+    new Point(65, 10),
     new Point(95, 10),
     new Point(95, 20),
-    new Point(85, 20)
+    new Point(75, 20),
+    new Point(75, 40),
+    new Point(65, 40)
 ]);
 const polygon2 = new Polygon(polygon2Outer, [polygon2Hole]);
 
 // Polygon 3: Triangle with triangular hole
+// План: Для каждой точки явно вычисляю новое значение y (y / 2 + 50) и подставляю результат в виде числа.
+
 const polygon3Outer = [
-    new Point(20, 60),
-    new Point(60, 60),
-    new Point(40, 100)
+    new Point(20, 55),   // 10 / 2 + 50 = 55
+    new Point(30, 70),   // 40 / 2 + 50 = 70
+    new Point(50, 60),   // 20 / 2 + 50 = 60
+    new Point(50, 70),   // 40 / 2 + 50 = 70
+    new Point(60, 55),   // 10 / 2 + 50 = 55
+    new Point(90, 55),   // 10 / 2 + 50 = 55
+    new Point(100, 60),  // 20 / 2 + 50 = 60
+    new Point(100, 75),  // 50 / 2 + 50 = 75
+    new Point(80, 85),   // 70 / 2 + 50 = 85
+    new Point(70, 75),   // 50 / 2 + 50 = 75
+    new Point(50, 95),   // 90 / 2 + 50 = 95
+    new Point(60, 100),  // 100 / 2 + 50 = 100
+    new Point(20, 100),  // 100 / 2 + 50 = 100
+    new Point(20, 80),   // 60 / 2 + 50 = 80
+    new Point(10, 70),   // 40 / 2 + 50 = 70
 ];
-const polygon3Hole = new Polygon([
-    new Point(35, 70),
-    new Point(45, 70),
-    new Point(40, 80)
-]);
-const polygon3 = new Polygon(polygon3Outer, [polygon3Hole]);
+const polygon3Holes = [
+    new Polygon([
+        new Point(60, 70),   // 40 / 2 + 50 = 70
+        new Point(90, 70),   // 40 / 2 + 50 = 70
+        new Point(80, 60),   // 20 / 2 + 50 = 60
+        new Point(80, 65),   // 30 / 2 + 50 = 65
+    ]),
+    new Polygon([
+        new Point(30, 75),   // 50 / 2 + 50 = 75
+        new Point(30, 95),   // 90 / 2 + 50 = 95
+        new Point(50, 80),   // 60 / 2 + 50 = 80
+    ])
+];
+const polygon3 = new Polygon(polygon3Outer, polygon3Holes);
 
 // Create polygon map and navmesh
 const polygonMap = new PolygonMap([polygon1, polygon2, polygon3]);
@@ -57,27 +81,9 @@ const navMesh = new NavMesh2d(polygonMap);
 
 console.log(`Created ${polygon1.tpolygons.length + polygon2.tpolygons.length + polygon3.tpolygons.length} triangles`);
 
-// === CREATING VISUALIZATION ===
-
-// Main visualization with all polygons
-const mainViz = new PathfindingVisualizer(1000, 800);
-mainViz.addTitle('Path Finding 2D - Navmesh with three holey polygons');
-
-// Add polygons with different colors
-mainViz.addPolygon(polygon1Outer, [polygon1Hole], 'Polygon 1', '#e3f2fd');
-mainViz.addPolygon(polygon2Outer, [polygon2Hole], 'Polygon 2', '#f3e5f5');
-mainViz.addPolygon(polygon3Outer, [polygon3Hole], 'Polygon 3', '#e8f5e8');
-
-// Show triangulation
-const allTriangles = [...polygon1.tpolygons, ...polygon2.tpolygons, ...polygon3.tpolygons];
-mainViz.addTriangulation(allTriangles);
-
-mainViz.addLegend();
-mainViz.save('pathfinding-overview.svg');
-
 // === CREATING DETAILED TEST CASE VISUALIZATIONS ===
 
-function createTestVisualization(testName, polygons, testPoints, navMesh) {
+function createTestVisualization(testName, polygons, testPoints, navMesh, closestToStart = false) {
     const viz = new PathfindingVisualizer(800, 600);
     viz.addTitle(`Test: ${testName}`);
 
@@ -106,8 +112,9 @@ function createTestVisualization(testName, polygons, testPoints, navMesh) {
         viz.addPoint(pointB, labelB, typeB);
 
         // Find and display path
-        const path = navMesh.findPath(pointA, pointB);
+        const path = navMesh.findPath(pointA, pointB, closestToStart);
         if (path.length > 0) {
+            console.log(path);
             viz.addPath(path, `${labelA} → ${labelB}`);
         }
     });
@@ -123,7 +130,7 @@ const successfulPaths = createTestVisualization(
     [
         { outer: polygon1Outer, holes: [polygon1Hole], triangles: polygon1.tpolygons },
         { outer: polygon2Outer, holes: [polygon2Hole], triangles: polygon2.tpolygons },
-        { outer: polygon3Outer, holes: [polygon3Hole], triangles: polygon3.tpolygons }
+        { outer: polygon3Outer, holes: polygon3Holes, triangles: polygon3.tpolygons }
     ],
     [
         {
@@ -133,14 +140,14 @@ const successfulPaths = createTestVisualization(
             labelB: 'B1'
         },
         {
-            pointA: new Point(65, 10),
-            pointB: new Point(75, 40),
+            pointA: new Point(65, 5),
+            pointB: new Point(85, 25),
             labelA: 'A2',
             labelB: 'B2'
         },
         {
-            pointA: new Point(30, 70),
-            pointB: new Point(50, 75),
+            pointA: new Point(24, 85),
+            pointB: new Point(87, 65),
             labelA: 'A3',
             labelB: 'B3'
         }
@@ -156,24 +163,24 @@ const pathsToOutside = createTestVisualization(
     [
         { outer: polygon1Outer, holes: [polygon1Hole], triangles: polygon1.tpolygons },
         { outer: polygon2Outer, holes: [polygon2Hole], triangles: polygon2.tpolygons },
-        { outer: polygon3Outer, holes: [polygon3Hole], triangles: polygon3.tpolygons }
+        { outer: polygon3Outer, holes: polygon3Holes, triangles: polygon3.tpolygons }
     ],
     [
         {
-            pointA: new Point(15, 15),
-            pointB: new Point(120, 120),
+            pointA: new Point(10, 10),
+            pointB: new Point(53, 35),
             labelA: 'C1',
             labelB: 'D1 (outside)'
         },
         {
-            pointA: new Point(70, 15),
-            pointB: new Point(110, 110),
+            pointA: new Point(70, 5),
+            pointB: new Point(90, 32),
             labelA: 'C2',
             labelB: 'D2 (outside)'
         },
         {
-            pointA: new Point(35, 80),
-            pointB: new Point(0, 120),
+            pointA: new Point(20, 60),
+            pointB: new Point(75, 85),
             labelA: 'C3',
             labelB: 'D3 (outside)'
         }
@@ -185,62 +192,45 @@ pathsToOutside.save('pathfinding-to-outside.svg');
 // Test 3: Points in holes
 console.log('Creating visualization of points in holes...');
 const holesTest = createTestVisualization(
-    'Points in polygon holes',
+    'Paths to points in polygon holes',
     [
         { outer: polygon1Outer, holes: [polygon1Hole], triangles: polygon1.tpolygons },
         { outer: polygon2Outer, holes: [polygon2Hole], triangles: polygon2.tpolygons },
-        { outer: polygon3Outer, holes: [polygon3Hole], triangles: polygon3.tpolygons }
+        { outer: polygon3Outer, holes: polygon3Holes, triangles: polygon3.tpolygons }
     ],
     [
         {
             pointA: new Point(10, 40),
-            pointB: new Point(25, 25),
+            pointB: new Point(25, 20),
             labelA: 'G1',
             labelB: 'H1 (hole)'
         },
         {
-            pointA: new Point(65, 25),
-            pointB: new Point(90, 15),
+            pointA: new Point(65, 45),
+            pointB: new Point(90, 17),
             labelA: 'G2',
             labelB: 'H2 (hole)'
+        },
+        {
+            pointA: new Point(30, 95),
+            pointB: new Point(85, 67),
+            labelA: 'G3',
+            labelB: 'H3 (hole)'
         }
     ],
     navMesh
 );
 
 // Add special points in holes
-holesTest.addPoint(new Point(25, 25), 'H1 (hole)', 'hole');
-holesTest.addPoint(new Point(90, 15), 'H2 (hole)', 'hole');
+holesTest.addPoint(new Point(25, 20), 'H1 (hole)', 'hole');
+holesTest.addPoint(new Point(90, 17), 'H2 (hole)', 'hole');
+holesTest.addPoint(new Point(85, 67), 'H3 (hole)', 'hole');
 holesTest.save('pathfinding-holes.svg');
 
-// Create detailed visualization of one polygon
-console.log('Creating detailed visualization of polygon 1...');
-const detailViz = new PathfindingVisualizer(600, 600);
-detailViz.addTitle('Detailed view: Polygon 1 with triangulation');
-detailViz.addPolygon(polygon1Outer, [polygon1Hole], '', '#e3f2fd');
-detailViz.addTriangulation(polygon1.tpolygons);
-
-// Add triangle centers
-polygon1.tpolygons.forEach((triangle, i) => {
-    detailViz.addPoint(triangle.centerPoint, `T${i + 1}`, 'normal');
-});
-
-// Show connections between triangles
-polygon1.tpolygons.forEach(triangle => {
-    triangle.connections.forEach(connection => {
-        const points = [triangle.centerPoint, connection.neighbor.centerPoint];
-        detailViz.addPath(points);
-    });
-});
-
-detailViz.addLegend();
-detailViz.save('pathfinding-detail-polygon1.svg');
 
 console.log('\n=== Visualization completed ===');
 console.log('Created files:');
-console.log('- pathfinding-overview.svg - general overview of all polygons');
 console.log('- pathfinding-successful.svg - successful paths');
 console.log('- pathfinding-to-outside.svg - paths to points outside navmesh');
 console.log('- pathfinding-holes.svg - working with holes');
-console.log('- pathfinding-detail-polygon1.svg - detailed view with triangulation');
 console.log('\nOpen SVG files in browser to view!'); 

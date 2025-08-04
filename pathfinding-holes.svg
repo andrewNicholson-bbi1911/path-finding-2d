@@ -18,56 +18,88 @@
   
   <!-- Background -->
   <rect width="800" height="600" fill="#fafafa"/>
-  <text x="400" y="30" class="title" text-anchor="middle" style="font-size: 20px;">Test: Points in polygon holes</text>
+  <text x="400" y="30" class="title" text-anchor="middle" style="font-size: 20px;">Test: Paths to points in polygon holes</text>
   <path d="M 50 50 L 300 50 L 300 300 L 50 300 Z" class="polygon" style="fill: #e3f2fd"/>
-  <path d="M 150 150 L 200 150 L 200 200 L 150 200 Z" class="hole"/>
+  <path d="M 125 125 L 225 125 L 225 225 L 125 225 Z" class="hole"/>
   <text x="175" y="175" class="title" text-anchor="middle">Polygon 1</text>
   <path d="M 350 50 L 550 50 L 550 200 L 450 200 L 450 300 L 350 300 Z" class="polygon" style="fill: #f3e5f5"/>
-  <path d="M 475 100 L 525 100 L 525 150 L 475 150 Z" class="hole"/>
+  <path d="M 375 100 L 525 100 L 525 150 L 425 150 L 425 250 L 375 250 Z" class="hole"/>
   <text x="450" y="183.33333333333334" class="title" text-anchor="middle">Polygon 2</text>
-  <path d="M 150 350 L 350 350 L 250 550 Z" class="polygon" style="fill: #e8f5e8"/>
-  <path d="M 225 400 L 275 400 L 250 450 Z" class="hole"/>
-  <text x="250" y="416.66666666666663" class="title" text-anchor="middle">Polygon 3</text>
-  <path d="M 50 50 L 150 150 L 150 200 Z" class="triangle"/>
-  <path d="M 200 150 L 150 150 L 50 50 Z" class="triangle"/>
-  <path d="M 50 300 L 50 50 L 150 200 Z" class="triangle"/>
-  <path d="M 200 150 L 50 50 L 300 50 Z" class="triangle"/>
-  <path d="M 300 300 L 50 300 L 150 200 Z" class="triangle"/>
-  <path d="M 200 200 L 200 150 L 300 50 Z" class="triangle"/>
-  <path d="M 300 300 L 150 200 L 200 200 Z" class="triangle"/>
-  <path d="M 200 200 L 300 50 L 300 300 Z" class="triangle"/>
-  <path d="M 350 50 L 475 100 L 475 150 Z" class="triangle"/>
-  <path d="M 525 100 L 475 100 L 350 50 Z" class="triangle"/>
-  <path d="M 450 200 L 450 300 L 350 300 Z" class="triangle"/>
-  <path d="M 350 300 L 350 50 L 475 150 Z" class="triangle"/>
+  <path d="M 150 325 L 200 400 L 300 350 L 300 400 L 350 325 L 500 325 L 550 350 L 550 425 L 450 475 L 400 425 L 300 525 L 350 550 L 150 550 L 150 450 L 100 400 Z" class="polygon" style="fill: #e8f5e8"/>
+  <path d="M 450 375 L 450 350 L 500 400 L 350 400 Z" class="hole"/>
+  <path d="M 300 450 L 200 525 L 200 425 Z" class="hole"/>
+  <text x="320" y="418.33333333333337" class="title" text-anchor="middle">Polygon 3</text>
+  <path d="M 50 50 L 125 125 L 125 225 Z" class="triangle"/>
+  <path d="M 225 125 L 125 125 L 50 50 Z" class="triangle"/>
+  <path d="M 50 300 L 50 50 L 125 225 Z" class="triangle"/>
+  <path d="M 225 125 L 50 50 L 300 50 Z" class="triangle"/>
+  <path d="M 300 300 L 50 300 L 125 225 Z" class="triangle"/>
+  <path d="M 225 225 L 225 125 L 300 50 Z" class="triangle"/>
+  <path d="M 300 300 L 125 225 L 225 225 Z" class="triangle"/>
+  <path d="M 225 225 L 300 50 L 300 300 Z" class="triangle"/>
+  <path d="M 350 50 L 375 100 L 375 250 Z" class="triangle"/>
+  <path d="M 525 100 L 375 100 L 350 50 Z" class="triangle"/>
+  <path d="M 350 300 L 350 50 L 375 250 Z" class="triangle"/>
   <path d="M 525 100 L 350 50 L 550 50 Z" class="triangle"/>
-  <path d="M 450 200 L 350 300 L 475 150 Z" class="triangle"/>
+  <path d="M 450 300 L 350 300 L 375 250 Z" class="triangle"/>
   <path d="M 525 150 L 525 100 L 550 50 Z" class="triangle"/>
-  <path d="M 550 200 L 450 200 L 475 150 Z" class="triangle"/>
+  <path d="M 450 300 L 375 250 L 425 250 Z" class="triangle"/>
   <path d="M 525 150 L 550 50 L 550 200 Z" class="triangle"/>
-  <path d="M 550 200 L 475 150 L 525 150 Z" class="triangle"/>
-  <path d="M 150 350 L 225 400 L 250 450 Z" class="triangle"/>
-  <path d="M 275 400 L 225 400 L 150 350 Z" class="triangle"/>
-  <path d="M 250 550 L 150 350 L 250 450 Z" class="triangle"/>
-  <path d="M 275 400 L 150 350 L 350 350 Z" class="triangle"/>
-  <path d="M 350 350 L 250 550 L 250 450 Z" class="triangle"/>
-  <path d="M 250 450 L 275 400 L 350 350 Z" class="triangle"/>
+  <path d="M 450 200 L 450 300 L 425 250 Z" class="triangle"/>
+  <path d="M 425 150 L 525 150 L 550 200 Z" class="triangle"/>
+  <path d="M 450 200 L 425 250 L 425 150 Z" class="triangle"/>
+  <path d="M 425 150 L 550 200 L 450 200 Z" class="triangle"/>
+  <path d="M 350 325 L 500 325 L 550 350 Z" class="triangle"/>
+  <path d="M 550 350 L 550 425 L 450 475 Z" class="triangle"/>
+  <path d="M 300 525 L 350 550 L 150 550 Z" class="triangle"/>
+  <path d="M 150 450 L 100 400 L 200 425 Z" class="triangle"/>
+  <path d="M 100 400 L 150 325 L 200 400 Z" class="triangle"/>
+  <path d="M 200 400 L 300 350 L 300 400 Z" class="triangle"/>
+  <path d="M 150 550 L 150 450 L 200 425 Z" class="triangle"/>
+  <path d="M 300 450 L 100 400 L 200 400 Z" class="triangle"/>
+  <path d="M 150 550 L 200 425 L 200 525 Z" class="triangle"/>
+  <path d="M 300 450 L 200 400 L 300 400 Z" class="triangle"/>
+  <path d="M 300 525 L 150 550 L 200 525 Z" class="triangle"/>
+  <path d="M 300 450 L 300 400 L 350 400 Z" class="triangle"/>
+  <path d="M 450 350 L 450 375 L 350 400 Z" class="triangle"/>
+  <path d="M 350 400 L 300 400 L 350 325 Z" class="triangle"/>
+  <path d="M 400 425 L 300 525 L 200 525 Z" class="triangle"/>
+  <path d="M 450 350 L 350 400 L 350 325 Z" class="triangle"/>
+  <path d="M 400 425 L 200 525 L 300 450 Z" class="triangle"/>
+  <path d="M 450 350 L 350 325 L 550 350 Z" class="triangle"/>
+  <path d="M 400 425 L 300 450 L 350 400 Z" class="triangle"/>
+  <path d="M 500 400 L 450 350 L 550 350 Z" class="triangle"/>
+  <path d="M 400 425 L 350 400 L 500 400 Z" class="triangle"/>
+  <path d="M 500 400 L 550 350 L 450 475 Z" class="triangle"/>
+  <path d="M 450 475 L 400 425 L 500 400 Z" class="triangle"/>
   <circle cx="100" cy="250" r="4" class="point-start"/>
   <text x="108" y="242" class="label">G1</text>
-  <circle cx="175" cy="175" r="4" class="point-outside"/>
-  <text x="183" y="167" class="label">H1 (hole)</text>
-  <path d="M 100 250 L 150 150 L 233.33333333333331 133.33333333333334" class="path"/>
-  <polygon points="126.34164078649988,197.31671842700024 126.34164078649988,200.67082039324993 123.65835921350012,199.32917960675007" class="path-arrow"/>
-  <polygon points="194.60840869373942,141.07831826125212 191.96084086937392,143.13753768020305 191.3724924639594,140.19579565313032" class="path-arrow"/>
-  <text x="150" y="135" class="label" text-anchor="middle" style="background: white;">G1 → H1 (hole)</text>
-  <circle cx="375" cy="175" r="4" class="point-start"/>
-  <text x="383" y="167" class="label">G2</text>
-  <circle cx="500" cy="125" r="4" class="point-outside"/>
-  <text x="508" y="117" class="label">H2 (hole)</text>
-  <path d="M 375 175 L 475 100 L 533.3333333333334 100" class="path"/>
-  <polygon points="427.4,135.7 425.9,138.7 424.1,136.3" class="path-arrow"/>
-  <polygon points="507.16666666666674,100 504.16666666666674,101.5 504.16666666666674,98.5" class="path-arrow"/>
-  <text x="475" y="85" class="label" text-anchor="middle" style="background: white;">G2 → H2 (hole)</text>
+  <circle cx="175" cy="150" r="4" class="point-outside"/>
+  <text x="183" y="142" class="label">H1 (hole)</text>
+  <path d="M 100 250 L 125 125 L 175 125" class="path"/>
+  <polygon points="113.08834840541455,184.55825797292724 113.97087101353638,187.79417420270727 111.02912898646362,187.20582579729273" class="path-arrow"/>
+  <polygon points="153,125 150,126.5 150,123.5" class="path-arrow"/>
+  <text x="125" y="110" class="label" text-anchor="middle" style="background: white;">G1 → H1 (hole)</text>
+  <circle cx="375" cy="275" r="4" class="point-start"/>
+  <text x="383" y="267" class="label">G2</text>
+  <circle cx="500" cy="135" r="4" class="point-outside"/>
+  <text x="508" y="127" class="label">H2 (hole)</text>
+  <path d="M 375 275 L 425 250 L 450 200 L 500 150" class="path"/>
+  <polygon points="402.68328157299976,261.15835921350015 400.6708203932499,263.84164078649985 399.3291796067501,261.15835921350015" class="path-arrow"/>
+  <polygon points="438.84164078649985,222.31671842700024 438.84164078649985,225.67082039324993 436.15835921350015,224.32917960675007" class="path-arrow"/>
+  <polygon points="477.12132034355966,172.87867965644037 476.06066017177983,176.06066017177983 473.93933982822017,173.93933982822017" class="path-arrow"/>
+  <text x="450" y="185" class="label" text-anchor="middle" style="background: white;">G2 → H2 (hole)</text>
+  <circle cx="200" cy="525" r="4" class="point-start"/>
+  <text x="208" y="517" class="label">G3</text>
+  <circle cx="475" cy="385" r="4" class="point-outside"/>
+  <text x="483" y="377" class="label">H3 (hole)</text>
+  <path d="M 200 525 L 200 525 L 400 425 L 400 425 L 500 400 L 480 380" class="path"/>
+  <polygon points="NaN,NaN NaN,NaN NaN,NaN" class="path-arrow"/>
+  <polygon points="302.68328157299976,473.65835921350015 300.6708203932499,476.34164078649985 299.3291796067501,473.65835921350015" class="path-arrow"/>
+  <polygon points="NaN,NaN NaN,NaN NaN,NaN" class="path-arrow"/>
+  <polygon points="452.910427500436,411.772393124891 450.3638034375545,413.955213750218 449.6361965624455,411.044786249782" class="path-arrow"/>
+  <polygon points="487.87867965644034,387.87867965644034 491.06066017177983,388.93933982822017 488.93933982822017,391.06066017177983" class="path-arrow"/>
+  <text x="400" y="410" class="label" text-anchor="middle" style="background: white;">G3 → H3 (hole)</text>
   <rect x="610" y="50" width="170" height="180" fill="white" stroke="#ddd" stroke-width="1"/>
   <text x="620" y="60" class="title">Legend:</text>
   <rect x="620" y="77" width="12" height="12" fill="#e8f4fd" stroke="#2196f3" stroke-width="1" />
@@ -84,8 +116,10 @@
   <text x="640" y="187" class="label">Point in hole</text>
   <line x1="620" y1="203" x2="632" y2="203" stroke="#4caf50" stroke-width="2"/>
   <text x="640" y="207" class="label">Found path</text>
-  <circle cx="175" cy="175" r="4" class="point-hole"/>
-  <text x="183" y="167" class="label">H1 (hole)</text>
-  <circle cx="500" cy="125" r="4" class="point-hole"/>
-  <text x="508" y="117" class="label">H2 (hole)</text>
+  <circle cx="175" cy="150" r="4" class="point-hole"/>
+  <text x="183" y="142" class="label">H1 (hole)</text>
+  <circle cx="500" cy="135" r="4" class="point-hole"/>
+  <text x="508" y="127" class="label">H2 (hole)</text>
+  <circle cx="475" cy="385" r="4" class="point-hole"/>
+  <text x="483" y="377" class="label">H3 (hole)</text>
 </svg>
