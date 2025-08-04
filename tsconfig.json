@@ -23,6 +23,10 @@
     ],
     "exclude": [
         "node_modules",
-        "dist"
+        "dist",
+        "*.svg",
+        "example-visual.js",
+        "visualizer.js",
+        ".gitattributes",
     ]
 }
