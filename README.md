@@ -21,13 +21,13 @@ npm install path-finding-2d
 You can find the visualization script in the project repository: [https://github.com/andrewNicholson-bbi1911/path-finding-2d](https://github.com/andrewNicholson-bbi1911/path-finding-2d)
 
 ### Successful Paths Inside Polygons
-![Successful Paths](pathfinding-successful.svg)
+![Successful Paths](https://github.com/andrewNicholson-bbi1911/path-finding-2d/blob/main/pathfinding-successful.svg)
 
 ### Paths to Points Outside Navmesh
-![Paths to Outside Points](pathfinding-to-outside.svg)
+![Paths to Outside Points](https://github.com/andrewNicholson-bbi1911/path-finding-2d/blob/main/pathfinding-to-outside.svg)
 
 ### Working with Polygon Holes
-![Working with Holes](pathfinding-holes.svg)
+![Working with Holes](https://github.com/andrewNicholson-bbi1911/path-finding-2d/blob/main/pathfinding-holes.svg)
 
 ## Quick Start
 
