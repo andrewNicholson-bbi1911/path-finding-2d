@@ -1,16 +1,9 @@
 {
     "name": "path-finding-2d",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "description": "Fast 2D pathfinding library using triangulated navmesh",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
-    "scripts": {
-        "build": "tsc",
-        "dev": "tsc --watch",
-        "example": "node example.js",
-        "visual": "node example-visual.js",
-        "demo": "node comparison-test.js"
-    },
     "keywords": [
         "pathfinding",
         "path-finding",
@@ -27,7 +20,11 @@
         "2d math",
         "typescript"
     ],
-    "author": "",
+    "author": "Andrey Elfimov <eandrey813@gmail.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/andrewNicholson-bbi1911/path-finding-2d"
+    },
     "license": "MIT",
     "dependencies": {
         "poly-math-2d": "^0.2.0"
