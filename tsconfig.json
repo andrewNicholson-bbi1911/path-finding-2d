@@ -24,9 +24,9 @@
     "exclude": [
         "node_modules",
         "dist",
-        "*.svg",
-        "example-visual.js",
-        "visualizer.js",
-        ".gitattributes",
+        "./*.svg",
+        "./example-visual.js",
+        "./visualizer.js",
+        "./.gitattributes",
     ]
 }
